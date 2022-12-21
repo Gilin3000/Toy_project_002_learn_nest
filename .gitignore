@@ -1,1 +1,5 @@
-letsStart/
+!/letsStart/
+/letsStart/*
+
+!/letsStart/src
+!/letsStart/save
