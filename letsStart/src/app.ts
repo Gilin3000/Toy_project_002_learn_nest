@@ -9,6 +9,16 @@ app.get("/", (req: express.Request, res: express.Response) => {
   res.send({ cats: Cat });
 });
 
+app.get("/cats/blue", (req, res) => {
+  console.log(req.rawHeaders[1]);
+  res.send({ blue: Cat[0] });
+});
+
+app.get("/cats/som", (req, res) => {
+    console.log(req.rawHeaders[1]);
+    res.send({ som: Cat[1] });
+  });
+
 app.listen(8000, () => {
   console.log("server is on...");
 });
