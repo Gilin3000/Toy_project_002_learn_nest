@@ -3,3 +3,7 @@
 
 !/letsStart/src
 !/letsStart/save
+
+.cache/
+dist/
+node_modules/
