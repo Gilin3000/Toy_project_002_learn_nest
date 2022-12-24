@@ -7,10 +7,12 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly CatsService: CatsService,
-  ) {}
+    )
+  {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello() {
+    return this.CatsService.hiCatServiceProduct();
+    // return 'hello world';
   }
 }
