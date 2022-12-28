@@ -4,6 +4,7 @@
     "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
-    "@types/passport-jwt": "^3.0.8"
+    "@types/passport-jwt": "^3.0.8",
+    "dotenv": "^16.0.3"
   }
 }

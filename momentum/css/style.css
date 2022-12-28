@@ -1,0 +1,120 @@
+body {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #ab526b;
+    background-color: #827085;
+    font: 900 1.375rem/1.5 'Merriweather', serif;
+    font-style: italic;
+    text-align: center;
+  }
+  
+  ::placeholder {
+    text-align: center;
+    color: whitesmoke;
+    opacity: 0.5;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .main-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  input {
+    background: transparent;
+    border: none;
+    font-size: 48px;
+    color: whitesmoke;
+  }
+  
+  #todo-form input {
+    font-size: 32px;
+    width: 50vh;
+  }
+  
+  .loginned {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  #clock {
+    margin: 0px;
+    font-size: 100px;
+    color: whitesmoke;
+  }
+  
+  #greeting {
+    margin: 0px;
+    font-size: 48px;
+    color: whitesmoke;
+  }
+  
+  #todo-list {
+    color: whitesmoke;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #todo-list li .btn-gradient {
+    text-decoration: none;
+    background: whitesmoke;
+    color: red;
+    font-size: 5px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  }
+  
+  #quote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  blockquote::before {
+    content: open-quote;
+  }
+  
+  blockquote::after {
+    content: close-quote;
+  }
+  
+  blockquote::before,
+  blockquote::after {
+    opacity: 0.25;
+    padding: 0 10px;
+    font-size: 3em;
+  }
+  
+  blockquote {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    padding: 20px 10px;
+    border-radius: 10px;
+    background-color: #e5ddcb;
+    opacity: 0.8;
+  }
