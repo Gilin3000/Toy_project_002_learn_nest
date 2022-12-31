@@ -1,8 +1,4 @@
-import { IsEmail } from 'class-validator';
-import {
-  IsNotEmpty,
-  IsString,
-} from 'class-validator/types/decorator/decorators';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class CatRequestDto {
   @IsEmail()
@@ -15,5 +11,5 @@ export class CatRequestDto {
 
   @IsString()
   @IsNotEmpty()
-  name: string;
+  catname: string;
 }
