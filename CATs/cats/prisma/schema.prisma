@@ -11,9 +11,10 @@ datasource db {
   url      = env("MYSQL_URL")
 }
 
-model Feed {
+model Cat {
   email      String   @unique
   catname    String  
   password   String
   imgUrl     String?
+  create     DateTime @default(now())
 }

@@ -15,6 +15,7 @@ import {
 } from '@nestjs/common';
 import { PositiveInPipe } from 'src/common/interceptors/positiveInt.pipe';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+import { Body } from '@nestjs/common/decorators';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor)
@@ -35,8 +36,9 @@ export class CatsController {
   }
 
   @Post()
-  createCat() {
-    return 'create cat';
+  async signUp(@Body() body) {
+    console.log(body);
+    return 'sign up';
   }
 
   @Put(':id')
