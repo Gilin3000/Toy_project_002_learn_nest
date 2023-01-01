@@ -4,7 +4,6 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Cat } from '.prisma/client';
 import { UnauthorizedException } from '@nestjs/common/exceptions';
-import { Exclude } from 'class-transformer';
 
 @Injectable()
 export class CatsService {
