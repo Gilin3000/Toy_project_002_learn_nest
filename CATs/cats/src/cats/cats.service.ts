@@ -4,11 +4,12 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Cat } from '.prisma/client';
 import { UnauthorizedException } from '@nestjs/common/exceptions';
+import { Exclude } from 'class-transformer';
 
 @Injectable()
 export class CatsService {
   constructor(private readonly PrismaService: PrismaService) {}
-  async signUp(body: CatRequestDto): Promise<Cat> {
+  async signUp(body: CatRequestDto): Promise<Omit<Cat, 'password'>> {
     // Check if email already exists
     const existingCat = await this.PrismaService.cat.findUnique({
       where: {
@@ -27,6 +28,8 @@ export class CatsService {
       },
     });
 
-    return cat;
+    const { password, ...result } = cat;
+
+    return result;
   }
 }
