@@ -1,5 +1,5 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Cat } from '@prisma/client';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
@@ -23,5 +23,22 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     this.$on('beforeExit', async () => {
       await app.close();
     });
+  }
+
+  async findCatByEmailWithoutPassword(
+    email: string,
+  ): Promise<Omit<Cat, 'password'>> {
+    const catInfo = await this.cat.findUnique({
+      where: {
+        email: email,
+      },
+      select: {
+        email: true,
+        catname: true,
+        imgUrl: true,
+        create: true,
+      },
+    });
+    return catInfo;
   }
 }
