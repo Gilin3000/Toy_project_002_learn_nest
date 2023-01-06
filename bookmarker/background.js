@@ -1,6 +1,6 @@
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, tab) => {
   if (tab.url && tab.url.includes("youtube.com/watch")) {
-    const queryParameters = changeInfo.url.split("?")[1];
+    const queryParameters = tab.url.split("?")[1];
     const urlParameters = new URLSearchParams(queryParameters);
 
     chrome.tabs.sendMessage(tabId, {
@@ -9,7 +9,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     });
   }
 });
-
 chrome.runtime.onConnect.addListener(function (port) {
   port.onMessage.addListener(function (msg) {
     port.postMessage({ counter: msg.counter + 1 });

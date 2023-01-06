@@ -19,13 +19,6 @@
     };
 
     currentVideoBookmarks = await fetchBookmarks();
-    // let trail = "&ytExt=ON";
-    // if (
-    //   !window.location.href.includes(trail) &&
-    //   !window.location.href.includes("ab_channel")
-    // ) {
-    //   window.location.href += trail;
-    // }
 
     chrome.storage.sync.set({
       [currentVideo]: JSON.stringify(
@@ -37,6 +30,7 @@
   const newVideoLoaded = async () => {
     const bookmarkBtnExists =
       document.getElementsByClassName("bookmark-btn")[0];
+
     currentVideoBookmarks = await fetchBookmarks();
 
     if (!bookmarkBtnExists) {
@@ -50,7 +44,7 @@
         document.getElementsByClassName("ytp-left-controls")[0];
       youtubePlayer = document.getElementsByClassName("video-stream")[0];
 
-      youtubeLeftControls.append(bookmarkBtn);
+      youtubeLeftControls.appendChild(bookmarkBtn);
       bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);
     }
   };

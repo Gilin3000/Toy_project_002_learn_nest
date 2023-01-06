@@ -22,7 +22,7 @@ const addNewBookmark = (bookmarks, bookmark) => {
 };
 
 const viewBookmarks = (currentBookmarks = []) => {
-  const bookmarksElement = document.getElementsById("bookmarks");
+  const bookmarksElement = document.getElementById("bookmarks");
   bookmarksElement.innerHTML = "";
 
   if (currentBookmarks.length > 0) {
@@ -31,8 +31,9 @@ const viewBookmarks = (currentBookmarks = []) => {
       addNewBookmark(bookmarksElement, bookmark);
     }
   } else {
-    bookmarksElement.innerHTML = '<i class="title">No bookmarks to show</i>';
+    bookmarksElement.innerHTML = '<i class="row">No bookmarks to show</i>';
   }
+
   return;
 };
 
@@ -67,6 +68,7 @@ const onDelete = async (e) => {
 
 const setBookmarkAttributes = (src, eventListener, controlParentElement) => {
   const controlElement = document.createElement("img");
+
   controlElement.src = "assets/" + src + ".png";
   controlElement.title = src;
   controlElement.addEventListener("click", eventListener);
@@ -92,6 +94,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementsByClassName("container")[0];
 
     container.innerHTML =
-      '<div classs="title">This is not a youtube videio page.</div>';
+      '<div class="title">This is not a youtube video page.</div>';
   }
 });
