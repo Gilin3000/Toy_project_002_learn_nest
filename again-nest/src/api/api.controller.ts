@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-@Controller({ host: 'api.example.com' })
+@Controller({ host: 'api.localhost' })
 export class ApiController {
   @Get()
   index(): string {
