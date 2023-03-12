@@ -49,4 +49,12 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
+
+  @Delete(':userId/memo/:memoId')
+  deleteUsermemo(
+    @Param('userId') userId: string,
+    @Param('memoId') memoId: string,
+  ) {
+    return `userId: ${userId}, memoId: ${memoId}`;
+  }
 }
