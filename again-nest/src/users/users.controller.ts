@@ -1,8 +1,5 @@
-import { Controller } from '@nestjs/common';
-
-@Controller('users')
-export class UsersController {}
 import { Controller, Post, Body } from '@nestjs/common';
+import { CreateUserDto } from 'src/dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
