@@ -12,7 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { HttpCode } from '@nestjs/common/decorators';
+import { Header, HttpCode } from '@nestjs/common/decorators';
 
 @Controller('users')
 export class UsersController {
@@ -30,6 +30,7 @@ export class UsersController {
     return res.status(200).send(users);
   }
 
+  @Header('Custom', 'Test-Header')
   @Get(':id')
   findOne(@Param('id') id: string) {
     if (+id < 1) {
