@@ -20,7 +20,10 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    const { name, email } = createUserDto;
+    console.log(createUserDto);
+    // return this.usersService.create(createUserDto);
+    return `name: ${name}, email: ${email}`;
   }
 
   @Get()
