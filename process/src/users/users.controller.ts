@@ -7,6 +7,8 @@ import {
   Post,
   ParseIntPipe,
   HttpStatus,
+  Query,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create_user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
@@ -44,5 +46,14 @@ export class UsersController {
     id: number,
   ) {
     return this.usersService.findOne(id);
+  }
+
+  @Get()
+  findAll(
+    @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+  ) {
+    console.log(offset, limit);
+    return;
   }
 }
