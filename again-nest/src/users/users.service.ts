@@ -39,6 +39,10 @@ export class UsersService {
     throw new Error('Method not implemented.');
   }
 
+  async login(email: string, password: string): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
