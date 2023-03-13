@@ -6,10 +6,14 @@ import {
   MaxLength,
   IsEmail,
 } from 'class-validator';
+import { BadRequestException } from '@nestjs/common';
 
 export class CreateUserDto {
-  @Transform((params) => {
-    params.value.trim();
+  @Transform(({ value, obj }) => {
+    if (obj.password.includes(obj.name.trim())) {
+      throw new BadRequestException('Password cannot contain name');
+    }
+    return value.trim();
   })
   @IsString()
   @MinLength(2)
