@@ -1,6 +1,7 @@
 import * as uuid from 'uuid';
 import { Injectable } from '@nestjs/common';
 import { EmailService } from 'src/email/email.service';
+import { UserInfo } from './interface/userinfo.interface';
 
 @Injectable()
 export class UsersService {
@@ -40,6 +41,10 @@ export class UsersService {
   }
 
   async login(email: string, password: string): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+
+  async getUserInfo(userId: string): Promise<UserInfo> {
     throw new Error('Method not implemented.');
   }
 
