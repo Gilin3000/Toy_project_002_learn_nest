@@ -1,12 +1,23 @@
-import { IsString, MinLength, MaxLength, IsEmail } from 'class-validator';
+import {
+  IsString,
+  Matches,
+  MinLength,
+  MaxLength,
+  IsEmail,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
-  @MinLength(1)
-  @MaxLength(20)
-  name: string;
+  @MinLength(2)
+  @MaxLength(30)
+  readonly name: string;
 
+  @IsString()
   @IsEmail()
-  email: string;
-  password: string;
+  @MaxLength(60)
+  readonly email: string;
+
+  @IsString()
+  @Matches(/^[A-Za-z\d!@#$%^&*()]{8,30}$/)
+  readonly password: string;
 }
