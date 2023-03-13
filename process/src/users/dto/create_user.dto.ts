@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsString,
   Matches,
@@ -7,6 +8,9 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
+  @Transform((params) => {
+    params.value.trim();
+  })
   @IsString()
   @MinLength(2)
   @MaxLength(30)
