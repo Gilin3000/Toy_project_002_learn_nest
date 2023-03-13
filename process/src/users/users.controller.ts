@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create_user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
@@ -35,7 +36,13 @@ export class UsersController {
   }
 
   @Get('/:id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
     return this.usersService.findOne(id);
   }
 }
