@@ -46,4 +46,8 @@ export class UsersService {
   async getUserInfo(userId: string): Promise<UserInfo> {
     throw new Error('Method not implemented.');
   }
+
+  async findOne(id: number) {
+    return `This action returns a #${id} user`;
+  }
 }
