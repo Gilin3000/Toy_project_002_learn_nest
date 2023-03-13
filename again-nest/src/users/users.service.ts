@@ -35,6 +35,10 @@ export class UsersService {
     );
   }
 
+  async verifyEmail(signupVerifyToken: string): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
