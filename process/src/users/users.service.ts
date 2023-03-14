@@ -1,5 +1,5 @@
 import { EmailService } from './../email/email.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import * as uuid from 'uuid';
 import { UserInfo } from './UserInfo';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,7 +15,10 @@ export class UsersService {
     private userRepository: Repository<UserEntity>,
   ) {}
   async createUser(name: string, email: string, password: string) {
-    await this.checkUserExists(email);
+    const UserExist = await this.checkUserExists(email);
+    if (UserExist) {
+      throw new UnprocessableEntityException('User already exists');
+    }
 
     const signupVerifyToken = uuid.v1();
 
@@ -23,8 +26,11 @@ export class UsersService {
     await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
 
-  private checkUserExists(email: string) {
-    return false;
+  private async checkUserExists(emailAddress: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({
+      where: { email: emailAddress },
+    });
+    return user !== undefined;
   }
 
   private async saveUser(
