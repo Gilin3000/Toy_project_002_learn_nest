@@ -49,30 +49,21 @@ export class UsersService {
     await this.userRepository.save(user);
   }
 
-  private async saveruserUsingQueryRunner(
+  private async saveruserUsingTransaction(
     name: string,
     email: string,
     password: string,
     signupVerifyToken: string,
   ) {
-    const queryRunner = this.dataSource.createQueryRunner();
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
-
-    try {
+    await this.dataSource.transaction(async (manager) => {
       const user = new UserEntity();
       user.id = ulid();
       user.name = name;
       user.email = email;
       user.password = password;
       user.signupVerifyToken = signupVerifyToken;
-      await queryRunner.manager.save(user);
-      await queryRunner.commitTransaction();
-    } catch (e) {
-      await queryRunner.rollbackTransaction();
-    } finally {
-      await queryRunner.release();
-    }
+      await manager.save(user);
+    });
   }
 
   private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
