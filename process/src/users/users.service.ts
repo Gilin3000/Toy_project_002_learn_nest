@@ -1,5 +1,9 @@
 import { EmailService } from './../email/email.service';
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  Injectable,
+  UnprocessableEntityException,
+  NotFoundException,
+} from '@nestjs/common';
 import * as uuid from 'uuid';
 import { UserInfo } from './UserInfo';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -59,7 +63,17 @@ export class UsersService {
   }
 
   async verifyEmail(signupVerifyToken: string): Promise<string> {
-    throw new Error('Method not implemented.');
+    const user = await this.userRepository.findOne({
+      where: { signupVerifyToken },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return this.authService.login({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
   }
 
   async login(email: string, password: string): Promise<string> {
