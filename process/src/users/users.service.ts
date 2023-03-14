@@ -3,7 +3,7 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import * as uuid from 'uuid';
 import { UserInfo } from './UserInfo';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
 import { ulid } from 'ulid';
 
@@ -11,6 +11,7 @@ import { ulid } from 'ulid';
 export class UsersService {
   constructor(
     private readonly emailService: EmailService,
+    private dataSource: DataSource,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
   ) {}
@@ -46,6 +47,32 @@ export class UsersService {
     user.password = password;
     user.signupVerifyToken = signupVerifyToken;
     await this.userRepository.save(user);
+  }
+
+  private async saveruserUsingQueryRunner(
+    name: string,
+    email: string,
+    password: string,
+    signupVerifyToken: string,
+  ) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const user = new UserEntity();
+      user.id = ulid();
+      user.name = name;
+      user.email = email;
+      user.password = password;
+      user.signupVerifyToken = signupVerifyToken;
+      await queryRunner.manager.save(user);
+      await queryRunner.commitTransaction();
+    } catch (e) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
