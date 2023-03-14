@@ -31,7 +31,7 @@ export class UsersService {
     const user = await this.userRepository.findOne({
       where: { email: emailAddress },
     });
-    return user !== undefined;
+    return user !== null;
   }
 
   private async saveUser(
