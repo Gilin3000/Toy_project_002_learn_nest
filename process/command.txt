@@ -3,5 +3,5 @@
  CREATE DATABASE test DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
  npm run typeorm migration:generate src/migrations/CreateUserTable -- -d ./ormconfig.ts
-
- 
+ npm run typeorm migration:run -- -d ./ormconfig.ts
+ npm run typeorm migration:revert -- -d ./ormconfig.ts
